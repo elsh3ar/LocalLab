@@ -1,0 +1,59 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>LocalLab — Consent-Based Test</title>
+  <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+<main class="wrap">
+  <header>
+    <small>LOCAL SECURITY LAB</small>
+    <h1>Remote Permission Test</h1>
+    <p>This page is a consent-based testing client. No test starts until you approve it here.</p>
+  </header>
+
+  <section class="card">
+    <h2>1. Join test session</h2>
+    <p>Joining shares basic browser metadata with the lab operator and Telegram. It does not share media or location.</p>
+    <label class="consent"><input type="checkbox" id="consent"> I agree to create a test session and share the metadata listed below.</label>
+    <button id="joinBtn">Join session</button>
+    <p id="sessionStatus" class="status" aria-live="polite">Not connected</p>
+    <div class="grid">
+      <div><label>Browser</label><p id="browser">—</p></div>
+      <div><label>Platform</label><p id="platform">—</p></div>
+      <div><label>Screen</label><p id="screen">—</p></div>
+      <div><label>Language</label><p id="language">—</p></div>
+      <div><label>Timezone</label><p id="timezone">—</p></div>
+    </div>
+  </section>
+
+  <section class="card">
+    <h2>2. Permission status</h2>
+    <p>These are browser-reported states. Checking them does not start a camera, microphone, or location request.</p>
+    <div class="grid">
+      <div><label>Camera</label><p id="cameraPermission">Checking…</p></div>
+      <div><label>Microphone</label><p id="micPermission">Checking…</p></div>
+      <div><label>Location</label><p id="geoPermission">Checking…</p></div>
+    </div>
+    <button class="secondary" id="refreshPermissions">Refresh status</button>
+  </section>
+
+  <section class="card">
+    <h2>3. Requests from operator</h2>
+    <p>Telegram requests appear here. Read the request and click Approve yourself. You can reject it or stop an active test.</p>
+    <div id="requestBox" class="request" aria-live="polite">No pending requests.</div>
+    <div class="actions">
+      <button id="approveBtn" disabled>Approve request</button>
+      <button class="danger" id="rejectBtn" disabled>Reject request</button>
+      <button class="secondary" id="stopBtn" disabled>Stop active test</button>
+    </div>
+    <video id="preview" autoplay playsinline muted></video>
+    <p id="testStatus" class="status" aria-live="polite"></p>
+  </section>
+  <footer>LocalLab · Consent-based browser testing</footer>
+</main>
+<script src="{{ url_for('static', filename='script.js') }}"></script>
+</body>
+</html>
